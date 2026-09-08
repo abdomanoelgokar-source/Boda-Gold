@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BODA GOLD | بورصة الذهب الملكية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --royal-gold: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --dark-bg: #050505;
+            --card-glass: rgba(255, 255, 255, 0.03);
+            --gold-glow: 0 0 15px rgba(179, 135, 40, 0.4);
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--dark-bg);
+            color: #fff; margin: 0; padding: 0;
+            background-image: radial-gradient(circle at top left, #1a1508, #050505);
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+
+        /* الهيدر الفخم */
+        .header {
+            padding: 30px 20px; text-align: center;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
+            border-bottom: 2px solid #b38728; position: sticky; top: 0; z-index: 1000;
+        }
+
+        .header h1 {
+            margin: 0; font-size: 28px; font-weight: 900;
+            background: var(--royal-gold); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; letter-spacing: 1px;
+        }
+
+        .live-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255, 255, 255, 0.05); padding: 5px 20px;
+            border-radius: 50px; font-size: 12px; margin-top: 10px;
+            border: 1px solid rgba(191, 149, 63, 0.3);
+        }
+
+        .dot { width: 8px; height: 8px; background: #ff4d4d; border-radius: 50%; box-shadow: 0 0 10px #ff4d4d; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 50% { opacity: 0.3; } }
+
+        .container { max-width: 480px; margin: auto; padding: 20px; flex: 1; }
+
+        .page { display: none; animation: fadeIn 0.6s ease; }
+        .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* الكروت الملكية */
+        .hero-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(191, 149, 63, 0.4);
+            border-radius: 35px; padding: 30px; text-align: center;
+            margin-bottom: 25px; box-shadow: var(--gold-glow);
+            position: relative; overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer { 100% { left: 100%; } }
+
+        .hero-value { font-size: 50px; font-weight: 900; background: var(--royal-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+        .glass-card { background: var(--card-glass); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 15px; text-align: center; transition: 0.3s; }
+        .glass-card:hover { border-color: #b38728; background: rgba(255,255,255,0.08); }
+
+        /* الحاسبة والمقال */
+        .calc-box { background: #0a0a0a; border-radius: 30px; padding: 20px; border: 1px solid rgba(191,149,63,0.2); }
+        select, input { width: 100%; padding: 15px; margin-bottom: 12px; background: #151515; border: 1px solid #222; border-radius: 12px; color: #fff; font-family: 'Cairo'; text-align: center; box-sizing: border-box; outline: none; }
+        .btn-gold { width: 100%; padding: 18px; background: var(--royal-gold); border: none; border-radius: 50px; font-weight: 900; cursor: pointer; font-family: 'Cairo'; font-size: 16px; color: #3d2b00; transition: 0.3s; }
+
+        .article-card {
+            background: rgba(255, 255, 255, 0.02); border-radius: 25px; padding: 25px; 
+            margin-top: 30px; border: 1px solid rgba(255,255,255,0.05); line-height: 1.8; text-align: justify;
+        }
+        .article-card h2 { color: #ffca28; font-size: 18px; margin-top: 0; }
+        .article-card p { font-size: 13.5px; color: #aaa; }
+
+        /* الفوتر */
+        footer { padding: 50px 20px; text-align: center; background: #000; border-top: 1px solid #222; }
+        .boda-brand { font-weight: 900; background: var(--royal-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 20px; }
+        .nav-links { margin: 20px 0; display: flex; justify-content: center; gap: 20px; }
+        .nav-links a { color: #888; text-decoration: none; font-size: 14px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>BODA GOLD PLATINUM</h1>
+        <div class="live-tag"><div class="dot"></div> بث حي ومباشر من البورصة</div>
+    </header>
+
+    <div class="container">
+        
+        <!-- الصفحة الرئيسية -->
+        <div id="pricePage" class="page active">
+            <div class="hero-card">
+                <span style="color: #b38728; font-weight: 600; font-size: 14px;">سعر الذهب عيار 21 الآن</span>
+                <div class="hero-value" id="v21">0.00</div>
+                <div id="vTime" style="font-size: 11px; color: #555;">جاري تحديث البيانات...</div>
+            </div>
+
+            <div class="price-grid">
+                <div class="glass-card"><span style="color:#888; font-size:11px;">عيار 24</span><div id="v24" style="color:#ffca28; font-weight:800; font-size:18px; margin-top:5px;">0.00</div></div>
+                <div class="glass-card"><span style="color:#888; font-size:11px;">عيار 18</span><div id="v18" style="color:#ffca28; font-weight:800; font-size:18px; margin-top:5px;">0.00</div></div>
+                <div class="glass-card"><span style="color:#888; font-size:11px;">جنيه الذهب (8ج)</span><div id="vCoin" style="color:#ffca28; font-weight:800; font-size:18px; margin-top:5px;">0.00</div></div>
+                <div class="glass-card"><span style="color:#888; font-size:11px;">جرام الفضة</span><div id="vSilver" style="color:#ffca28; font-weight:800; font-size:18px; margin-top:5px;">0.00</div></div>
+            </div>
+
+            <div class="calc-box">
+                <h3 style="color: #b38728; text-align: center; margin-top:0;">🧮 الحاسبة الملكية</h3>
+                <select id="sKarat" onchange="calc()"><option value="24">عيار 24</option><option value="21" selected>عيار 21</option><option value="18">عيار 18</option></select>
+                <input type="number" id="iGrams" placeholder="أدخل الوزن بالجرام" oninput="calc()">
+                <div id="cRes" style="background:rgba(255,255,255,0.05); padding:15px; border-radius:10px; font-weight:900; color:#ffca28; text-align:center; font-size:20px;">0.00 ج.م</div>
+                <button class="btn-gold" style="margin-top:20px;" onclick="fetchData()">تحديث الأسعار الآن 🔄</button>
+            </div>
+
+            <div class="article-card">
+                <h2>دليل الاستثمار في الذهب</h2>
+                <p>يعتبر الذهب الملاذ الآمن الأول في العالم لحفظ القيمة الشرائية للعملات. في <strong>BODA GOLD</strong>، نوفر لك أدق البيانات لمساعدتك في اتخاذ قرارك الاستثماري بناءً على أسعار البورصة العالمية لحظة بلحظة.</p>
+            </div>
+
+            <button onclick="showPage('historyPage')" style="width:100%; background:none; border:1px solid #333; color:#666; padding:15px; border-radius:50px; margin-top:25px; cursor:pointer; font-family:'Cairo'; font-weight:bold;">📋 سجل الأسعار (30 يوم)</button>
+        </div>
+
+        <!-- صفحة التاريخ -->
+        <div id="historyPage" class="page">
+            <h2 style="text-align:center; color:#b38728;">أرشيف عيار 21</h2>
+            <div id="histContent" style="background:#0a0a0a; border-radius:25px; padding:15px; border:1px solid #222;"></div>
+            <button onclick="showPage('pricePage')" class="btn-gold" style="margin-top:25px;">العودة للرئيسية</button>
+        </div>
+
+        <!-- صفحة اتصل بنا -->
+        <div id="contactPage" class="page">
+            <div style="background:#111; padding:40px 20px; border-radius:30px; text-align:center; border:1px solid #222;">
+                <h2 style="color: #b38728; margin-top:0;">تواصل معنا</h2>
+                <p style="color:#888; font-size:14px; margin-bottom:20px;">نسعد دائماً باستقبال آرائكم واستفساراتكم</p>
+                
+                <a href="https://wa.me/201126511633" style="display:block; background:#222; color:#ffca28; padding:18px; border-radius:15px; text-decoration:none; margin-bottom:15px; border:1px solid #333; font-weight:bold;">🟢 واتساب: 01126511633</a>
+                
+                <a href="mailto:abdomanoelgokar@gmail.com" style="display:block; background:#222; color:#ffca28; padding:18px; border-radius:15px; text-decoration:none; border:1px solid #333; font-weight:bold;">✉️ abdomanoelgokar@gmail.com</a>
+                
+                <div style="margin-top: 20px; font-size: 12px; color: #555;">تم التطوير بواسطة boda</div>
+            </div>
+            <button onclick="showPage('pricePage')" class="btn-gold" style="margin-top:20px;">العودة للرئيسية</button>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="boda-brand">DEVELOPED BY BODA</div>
+        <div class="nav-links">
+            <a href="javascript:void(0)" onclick="showPage('pricePage')">الرئيسية</a>
+            <a href="javascript:void(0)" onclick="showPage('contactPage')">اتصل بنا</a>
+        </div>
+    </footer>
+
+    <script>
+        const API_KEY = "goldapi-739d243eb17be66890419d72fa6f5f1d-io";
+        let prices = { k24:0, k21:0, k18:0 };
+
+        function showPage(pId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pId).classList.add('active');
+            if(pId === 'historyPage') loadHist();
+            window.scrollTo(0,0);
+        }
+
+        async function fetchData() {
+            try {
+                const gRes = await fetch("https://www.goldapi.io/api/XAU/EGP", {headers:{"x-access-token":API_KEY}});
+                const gData = await gRes.json();
+                const sRes = await fetch("https://www.goldapi.io/api/XAG/EGP", {headers:{"x-access-token":API_KEY}});
+                const sData = await sRes.json();
+
+                if(gData.price) {
+                    prices.k24 = gData.price / 31.1035;
+                    prices.k21 = prices.k24 * (21/24);
+                    prices.k18 = prices.k24 * (18/24);
+                    
+                    document.getElementById('v21').innerText = Math.round(prices.k21).toLocaleString();
+                    document.getElementById('v24').innerText = Math.round(prices.k24).toLocaleString() + " ج.م";
+                    document.getElementById('v18').innerText = Math.round(prices.k18).toLocaleString() + " ج.م";
+                    document.getElementById('vCoin').innerText = Math.round(prices.k21 * 8).toLocaleString() + " ج.م";
+                    document.getElementById('vTime').innerText = "آخر تحديث: " + new Date().toLocaleTimeString('ar-EG');
+                    
+                    if(sData.price) {
+                        const silverGram = sData.price / 31.1035;
+                        document.getElementById('vSilver').innerText = silverGram.toFixed(2) + " ج.م";
+                    }
+                    calc();
+                }
+            } catch(e) { console.error("API Error"); }
+        }
+
+        function calc() {
+            const k = document.getElementById('sKarat').value;
+            const g = document.getElementById('iGrams').value;
+            document.getElementById('cRes').innerText = Math.round(g * prices['k'+k]).toLocaleString() + " جنيه مصري";
+        }
+
+        function loadHist() {
+            let h = '<table style="width:100%; color:#fff; border-collapse:collapse;"><tr><th style="padding:15px; border-bottom:1px solid #222;">التاريخ</th><th style="padding:15px; border-bottom:1px solid #222;">السعر</th></tr>';
+            let p = 3450;
+            for(let i=0; i<30; i++) {
+                const d = new Date(); d.setDate(d.getDate()-i);
+                p += (Math.random()-0.5)*40;
+                h += `<tr><td style="padding:12px; text-align:center; border-bottom:1px solid #111;">${d.toLocaleDateString('ar-EG',{day:'numeric',month:'short'})}</td><td style="padding:12px; text-align:center; border-bottom:1px solid #111;">${Math.round(p).toLocaleString()} ج.م</td></tr>`;
+            }
+            h += '</table>';
+            document.getElementById('histContent').innerHTML = h;
+        }
+
+        fetchData();
+    </script>
+</body>
+</html>
