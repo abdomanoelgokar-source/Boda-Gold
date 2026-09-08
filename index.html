@@ -59,13 +59,21 @@
             position: relative; overflow: hidden;
         }
 
+        .hero-card::before {
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer { 100% { left: 100%; } }
+
         .hero-value { font-size: 55px; font-weight: 900; background: var(--royal-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
         .glass-card { background: var(--card-glass); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 15px; text-align: center; transition: 0.3s; }
-        
+        .glass-card:hover { border-color: #b38728; background: rgba(255,255,255,0.08); }
+
         /* الحاسبة والمقال */
-        .calc-box { background: #0a0a0a; border-radius: 30px; padding: 25px; border: 1px solid rgba(191,149,63,0.2); }
+        .calc-box { background: #0a0a0a; border-radius: 30px; padding: 20px; border: 1px solid rgba(191,149,63,0.2); }
         select, input { width: 100%; padding: 15px; margin-bottom: 12px; background: #151515; border: 1px solid #222; border-radius: 12px; color: #fff; font-family: 'Cairo'; text-align: center; box-sizing: border-box; outline: none; }
         .btn-gold { width: 100%; padding: 18px; background: var(--royal-gold); border: none; border-radius: 50px; font-weight: 900; cursor: pointer; font-family: 'Cairo'; font-size: 16px; color: #3d2b00; transition: 0.3s; }
 
@@ -87,7 +95,7 @@
 
     <header class="header">
         <h1>BODA GOLD PLATINUM</h1>
-        <div class="live-tag"><div class="dot"></div> بث حي ومباشر من البورصة</div>
+        <div class="live-tag"><div class="dot"></div> تحديث حي - MetalPrice Engine</div>
     </header>
 
     <div class="container">
@@ -97,13 +105,13 @@
             <div class="hero-card">
                 <span style="color: #b38728; font-weight: 600; font-size: 14px;">سعر الذهب عيار 21 الآن</span>
                 <div class="hero-value" id="v21">0.00</div>
-                <div id="vTime" style="font-size: 11px; color: #555;">جاري تحديث البيانات...</div>
+                <div id="vTime" style="font-size: 11px; color: #555;">جاري سحب البيانات...</div>
             </div>
 
             <div class="price-grid">
                 <div class="glass-card"><span style="color:#888; font-size:11px;">عيار 24</span><div id="v24" style="color:#ffca28; font-weight:800; font-size:18px; margin-top:5px;">0.00</div></div>
                 <div class="glass-card"><span style="color:#888; font-size:11px;">عيار 18</span><div id="v18" style="color:#ffca28; font-weight:800; font-size:18px; margin-top:5px;">0.00</div></div>
-                <div class="glass-card"><span style="color:#888; font-size:11px;">جنيه الذهب (8ج)</span><div id="vCoin" style="color:#ffca28; font-weight:800; font-size:18px; margin-top:5px;">0.00</div></div>
+                <div class="glass-card"><span style="color:#888; font-size:11px;">جنيه الذهب</span><div id="vCoin" style="color:#ffca28; font-weight:800; font-size:18px; margin-top:5px;">0.00</div></div>
                 <div class="glass-card"><span style="color:#888; font-size:11px;">جرام الفضة</span><div id="vSilver" style="color:#ffca28; font-weight:800; font-size:18px; margin-top:5px;">0.00</div></div>
             </div>
 
@@ -127,7 +135,7 @@
         <div id="historyPage" class="page">
             <h2 style="text-align:center; color:#b38728;">أرشيف عيار 21</h2>
             <div id="histContent" style="background:#0a0a0a; border-radius:25px; padding:15px; border:1px solid #222;"></div>
-            <button onclick="showPage('pricePage')" class="btn-gold" style="margin-top:20px;">العودة للرئيسية</button>
+            <button onclick="showPage('pricePage')" class="btn-gold" style="margin-top:25px;">العودة للرئيسية</button>
         </div>
 
         <!-- صفحة اتصل بنا -->
@@ -135,12 +143,10 @@
             <div style="background:#111; padding:40px 20px; border-radius:30px; text-align:center; border:1px solid #222;">
                 <h2 style="color: #b38728; margin-top:0;">تواصل معنا</h2>
                 <a href="https://wa.me/201126511633" style="display:block; background:#222; color:#ffca28; padding:18px; border-radius:15px; text-decoration:none; margin-bottom:15px; border:1px solid #333; font-weight:bold;">🟢 واتساب: 01126511633</a>
-                <a href="mailto:abdomanoelgokar@gmail.com" style="display:block; background:#222; color:#ffca28; padding:18px; border-radius:15px; text-decoration:none; border:1px solid #333; font-weight:bold;">✉️ البريد الإلكتروني</a>
-                <p style="color:#444; font-size:12px; margin-top:15px;">تم التطوير بواسطة boda</p>
+                <a href="mailto:abdomanoelgokar@gmail.com" style="display:block; background:#222; color:#ffca28; padding:18px; border-radius:15px; text-decoration:none; border:1px solid #333; font-weight:bold;">abdomanoelgokar@gmail.com</a>
             </div>
             <button onclick="showPage('pricePage')" class="btn-gold" style="margin-top:20px;">العودة للرئيسية</button>
         </div>
-
     </div>
 
     <footer>
@@ -155,8 +161,8 @@
     <script defer src="/_vercel/insights/script.js"></script>
 
     <script>
-        const API_KEY = "goldapi-739d243eb17be66890419d72fa6f5f1d-io";
-        let prices = { k24: 0, k21: 0, k18: 0 };
+        const API_KEY = "b94acad5b9865c489f6a50b1e24f0520";
+        let prices = { k24:0, k21:0, k18:0, silver:0 };
 
         function showPage(pId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -167,56 +173,45 @@
 
         async function fetchData() {
             const timeText = document.getElementById('vTime');
-            timeText.innerText = "جاري الاتصال بالسيرفر...";
-            
             try {
-                // جلب الذهب
-                const gRes = await fetch("https://www.goldapi.io/api/XAU/EGP", {
-                    headers: { "x-access-token": API_KEY }
-                });
-                
-                if (!gRes.ok) {
-                    const err = await gRes.json();
-                    alert("خطأ من السيرفر: " + (err.error || "انتهت الطلبات المجانية"));
-                    timeText.innerText = "انتهت صلاحية المحاولات المجانية";
-                    return;
-                }
+                // طلب الذهب والفضة والدولار في طلب واحد
+                const url = `https://api.metalpriceapi.com/v1/latest?api_key=${API_KEY}&base=USD&currencies=EGP,XAU,XAG`;
+                const res = await fetch(url);
+                const data = await res.json();
 
-                const gData = await gRes.json();
-                
-                // جلب الفضة
-                const sRes = await fetch("https://www.goldapi.io/api/XAG/EGP", {
-                    headers: { "x-access-token": API_KEY }
-                });
-                const sData = await sRes.json();
+                if (data.rates) {
+                    const usdToEgp = data.rates.EGP; // سعر الدولار مقابل الجنيه
+                    const goldOunceUSD = 1 / data.rates.XAU; // سعر أوقية الذهب بالدولار
+                    const silverOunceUSD = 1 / data.rates.XAG; // سعر أوقية الفضة بالدولار
 
-                if(gData.price) {
-                    prices.k24 = gData.price / 31.1035;
-                    prices.k21 = prices.k24 * (21/24);
-                    prices.k18 = prices.k24 * (18/24);
+                    // تحويل الذهب لجرام بالجنيه
+                    const gram24EGP = (goldOunceUSD * usdToEgp) / 31.1035;
+                    prices.k24 = gram24EGP;
+                    prices.k21 = gram24EGP * (21/24);
+                    prices.k18 = gram24EGP * (18/24);
                     
+                    // تحويل الفضة لجرام بالجنيه
+                    prices.silver = (silverOunceUSD * usdToEgp) / 31.1035;
+
+                    // تحديث الواجهة
                     document.getElementById('v21').innerText = Math.round(prices.k21).toLocaleString();
                     document.getElementById('v24').innerText = Math.round(prices.k24).toLocaleString() + " ج.م";
                     document.getElementById('v18').innerText = Math.round(prices.k18).toLocaleString() + " ج.م";
                     document.getElementById('vCoin').innerText = Math.round(prices.k21 * 8).toLocaleString() + " ج.م";
-                    timeText.innerText = "آخر تحديث: " + new Date().toLocaleTimeString('ar-EG');
+                    document.getElementById('vSilver').innerText = prices.silver.toFixed(2) + " ج.م";
                     
-                    if(sData.price) {
-                        const silverGram = sData.price / 31.1035;
-                        document.getElementById('vSilver').innerText = silverGram.toFixed(2) + " ج.م";
-                    }
+                    timeText.innerText = "تحديث حي: " + new Date().toLocaleTimeString('ar-EG');
                     calc();
                 }
             } catch(e) {
-                alert("فشل الاتصال بالإنترنت. تأكد من باقة النت.");
-                timeText.innerText = "خطأ في الاتصال";
+                timeText.innerText = "خطأ في الاتصال بالسيرفر";
             }
         }
 
         function calc() {
             const k = document.getElementById('sKarat').value;
             const g = document.getElementById('iGrams').value;
-            document.getElementById('cRes').innerText = "الإجمالي: " + Math.round(g * prices['k'+k]).toLocaleString() + " جنيه مصري";
+            document.getElementById('cRes').innerText = "الإجمالي: " + Math.round(g * prices['k'+k]).toLocaleString() + " ج.م";
         }
 
         function loadHist() {
@@ -231,7 +226,6 @@
             document.getElementById('histContent').innerHTML = h;
         }
 
-        // تشغيل فوري
         fetchData();
     </script>
 </body>
